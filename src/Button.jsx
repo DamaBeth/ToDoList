@@ -1,19 +1,36 @@
 import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-export default function Button(props){
-    const styles = {backgroundColor: "red", fontSize: "2ren", padding: "1ren"};
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+}));
 
+export default function HeaderButton(props){
+    const styles = {padding: "2ren", margin: "5px", position: 'left',  top: '0%', right: 0};
+    /*
     if(true){
         styles.border   =   "2px yellow solid";
     }
+    */
+    const classes = useStyles();
 
     const action    =   () => {
         alert(props.name);
     };
 
     return (
+        <Button onClick={action} style={styles} variant="outlined" color="primary">
+            {props.name}
+        </Button>
+        
+        /*
     <button onClick={action} style={styles} type="button">
         {props.name}
-    </button>
+    </button>*/
     );
 }
