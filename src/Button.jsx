@@ -1,14 +1,5 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-}));
 
 export default function HeaderButton(props){
     const styles = {padding: "2ren", margin: "10px"};
@@ -18,8 +9,6 @@ export default function HeaderButton(props){
         styles.border   =   "2px yellow solid";
     }
     */
-    const classes = useStyles();
-
     const action    =   () => {
         alert(name);
     };

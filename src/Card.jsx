@@ -8,11 +8,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 
-
 const useStyles = makeStyles({
   root: {
     minWidth: 200,
-    maxHeight:85,
+    maxHeight:150,
     background: '#212F3D',
     margin: "5px",
     borderTopColor:'#C70039',
@@ -34,10 +33,16 @@ const useStyles = makeStyles({
     color:'#CCD1D1'
   },
   hour: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
     color:'#CCD1D1',
-    position:'left'
+    textAlign: 'right'
+  },
+  buttonAction: {
+      textAlign: 'left',
+      alignItems: 'left',
+      color: '#CCD1D1',
+
   }
 });
 
@@ -64,15 +69,15 @@ export default function SimpleCard(props) {
             Hora: {props.hora}
           </Typography>
         </Typography>
+        <CardActions>
+              <IconButton className={classes.buttonAction} onClick={actionEdit} aria-label="edit">
+                  <EditIcon />
+              </IconButton>
+              <IconButton className={classes.buttonAction} onClick={actionDelete} aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </CardActions>
       </CardContent>
-      <CardActions>
-        <IconButton onClick={actionEdit} aria-label="edit">
-            <EditIcon />
-        </IconButton>
-        <IconButton onClick={actionDelete} aria-label="delete">
-            <DeleteIcon />
-        </IconButton>
-      </CardActions>
     </Card>
   );
 }
