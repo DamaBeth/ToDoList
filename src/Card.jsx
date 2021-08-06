@@ -3,17 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 
+
 const useStyles = makeStyles({
   root: {
     minWidth: 200,
-    background: '#FFC300',
-    margin: "5px"
+    maxHeight:85,
+    background: '#212F3D',
+    margin: "5px",
+    borderTopColor:'#C70039',
+    borderBottomColor: '#C70039',
+    color:'#F2F4F4'
   },
   bullet: {
     display: 'inline-block',
@@ -21,22 +25,24 @@ const useStyles = makeStyles({
     transform: 'scale(0.5)',
   },
   title: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   pos: {
-    marginBottom: 15,
-    fontSize: 10
+    marginBottom: 6,
+    fontSize: 10,
+    color:'#CCD1D1'
   },
   hour: {
-    fontSize: 10,
-    fontWeight: 'bold'
+    fontSize: 14,
+    fontWeight: 'bold',
+    color:'#CCD1D1',
+    position:'left'
   }
 });
 
 export default function SimpleCard(props) {
   const classes = useStyles();
-  const btnStyles = {background: '#C70039', fontSize: 9, fontWeight: 'bold'};
 
   const actionDelete    =   () => {
     alert("Tarea eliminada");

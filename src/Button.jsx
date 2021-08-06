@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeaderButton(props){
-    const styles = {padding: "2ren", margin: "5px", position: 'left',  top: '0%', right: 0};
+    const styles = {padding: "2ren", margin: "10px"};
+    const {name} = props;
     /*
     if(true){
         styles.border   =   "2px yellow solid";
@@ -20,12 +21,12 @@ export default function HeaderButton(props){
     const classes = useStyles();
 
     const action    =   () => {
-        alert(props.name);
+        alert(name);
     };
 
     return (
         <Button onClick={action} style={styles} variant="outlined" color="primary">
-            {props.name}
+            {name}
         </Button>
         
         /*
