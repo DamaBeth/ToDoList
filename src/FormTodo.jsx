@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormCard(){
     const classes = useStyles();
-    const styleButton = {color:"#C70039", textAlign: "center"};
+    const styleButton = {
+        color:"#C70039"
+    };
 
-    const actionAdd = () => {
-        alert("Tarea añadida");
-    }
+    const [showForm, hideForm] = useState(false); //bool
 
     const initialCard = {
         id:'', 
@@ -59,6 +59,7 @@ export default function FormCard(){
                 id:Math.max(...cards.map(card => card.id)) + 1
             }
         ])
+        document.getElementById("addNewCard").reset();
     };
 
     return (
@@ -78,17 +79,26 @@ export default function FormCard(){
                     })}
                 </Grid>
             </Grid>
-            <IconButton onClick={actionAdd} style={styleButton} aria-label="addcircleicon">
-                <AddCircleIcon />
-            </IconButton>
 
-            <form onSubmit={(ev) => addCard(ev)} className={classes.root} noValidate autoComplete="off">
-                <TextField type="text" onChange={(ev) => setCard({...card, nombre: ev.target.value})}       fullWidth style={{ margin: 8 }} id="nombre" label="Nombre" />
-                <TextField type="text" onChange={(ev) => setCard({...card, descripcion: ev.target.value})}  fullWidth style={{ margin: 8 }} id="descripcion" label="Descripción" />
-                <TextField type="text" onChange={(ev) => setCard({...card, hora: ev.target.value})}                   style={{ margin: 8 }} id="hora" label="Hora" />
-                <Button    type="submit" variant="outlined" style={{ margin: 15 }} color="secondary"> Agregar </Button>
-            
-            </form>
+            <div className="center">
+                <IconButton onClick={() => hideForm(!showForm)}  aria-label="addcircleicon">
+                    <AddCircleIcon style={styleButton} />
+                </IconButton>
+            </div>
+
+            { showForm ? (
+                <form onSubmit={(ev) => addCard(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
+                    <TextField type="text" onChange={(ev) => setCard({...card, nombre: ev.target.value})}       fullWidth style={{ margin: 8 }} id="nombre" label="Nombre" />
+                    <TextField type="text" onChange={(ev) => setCard({...card, descripcion: ev.target.value})}  fullWidth style={{ margin: 8 }} id="descripcion" label="Descripción" />
+                    <TextField type="text" onChange={(ev) => setCard({...card, hora: ev.target.value})}                   style={{ margin: 8 }} id="hora" label="Hora" />
+                    <br/>
+                    <div className="right">
+                        <Button    type="submit" variant="outlined" style={{ margin: 15 }} color="secondary"> Agregar </Button>
+                    </div>
+                </form>
+            ) : (
+                console.log("Formulario oculto")) 
+            }
         </div> 
     );
 }

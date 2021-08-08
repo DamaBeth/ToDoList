@@ -1,11 +1,23 @@
 .App {
-  align-items: left;
+  display: 'flex'
 }
 
 .App-header {
   background-color: #282c34;
   min-height: 8vh;
   display: flex;
-  align-items: right;
+  align-items: left;
   color: white;
+}
+
+div.center {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+div.right{
+  text-align: right;
+  align-items: right;
+  justify-content: right;
 }

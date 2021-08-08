@@ -1,12 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
+import { CardActions, CardContent, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
@@ -41,8 +38,7 @@ const useStyles = makeStyles({
   buttonAction: {
       textAlign: 'left',
       alignItems: 'left',
-      color: '#CCD1D1',
-
+      color: '#CCD1D1'
   }
 });
 
@@ -65,18 +61,18 @@ export default function SimpleCard(props) {
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {props.descripcion}
-          <Typography className={classes.hour} color="textSecondary">
+        </Typography>
+        <Typography className={classes.hour} color="textSecondary">
             Hora: {props.hora}
-          </Typography>
         </Typography>
         <CardActions>
-              <IconButton className={classes.buttonAction} onClick={actionEdit} aria-label="edit">
-                  <EditIcon />
-              </IconButton>
-              <IconButton className={classes.buttonAction} onClick={actionDelete} aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            </CardActions>
+            <IconButton className={classes.buttonAction} onClick={actionEdit} aria-label="edit">
+                <EditIcon fontSize="small" />
+            </IconButton>
+            <IconButton className={classes.buttonAction} onClick={actionDelete} aria-label="delete">
+                <DeleteIcon fontSize="small" />
+            </IconButton>
+        </CardActions>
       </CardContent>
     </Card>
   );
