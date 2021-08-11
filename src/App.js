@@ -1,19 +1,28 @@
 import './App.css';
 import React from 'react';
-import HeaderButton from "./Button";
-import FormCard from "./FormTodo";
+import LeftBar from "./LeftBar";
+import getList from "./Provider";
+import { useDispatch, useSelector, useEffect} from "react-redux";
+import { setPokemons } from "./redux/reducers/pokemonReducer";
 
 function App() {
-  const styles = {margin: "10px", left: 0, position: "relative", fontSize: 25, fontWeight: 'bold' };
- 
+  const pokemons = useSelector((state) => state.pokemon);
+  const dispatch = useDispatch();
+
+  console.table(pokemons);
+
+  const getListUI = async () => {
+    const response = await getList();
+    dispatch(setPokemons(response.data.results));
+  };
+
+  useEffect(() => {
+    getListUI();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <HeaderButton name="Login"/>
-        <HeaderButton name="Registrarse" />
-      </header>
-      <p style={styles}>Hoy</p>
-        <FormCard />
+      <LeftBar/>
     </div>
   );
 }
