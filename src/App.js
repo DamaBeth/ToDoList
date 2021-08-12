@@ -15,11 +15,11 @@ function App() {
     const response = await getList();
     dispatch(setPokemons(response.data.results));
   };
-
+/*
   useEffect(() => {
     getListUI();
   }, []);
-
+*/
   return (
     <div className="App">
       <LeftBar/>
