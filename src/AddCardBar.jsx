@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function CustomizedInputBase({card, setCard}) {
+export default function AddCardBar({card, setCard}) {
   const classes = useStyles();
 
     return (

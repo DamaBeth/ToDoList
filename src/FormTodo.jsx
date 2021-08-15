@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { setCardsConsume } from "./redux/reducers/cardConsumeReducer";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
-import FormCreate from "./FormCreate";
-import Cards from "./Cards";
 import CardsConsume from "./CardsConsume";
+import FormCreate from "./FormCreate";
 import getList from "./Provider";
+import Cards from "./Cards";
 
 export default function FormCard(){
+    const cardsConsume = useSelector((state) => state.cardConsume);
+    const dispatch = useDispatch();
+    console.table(cardsConsume);
+
     const [showForm, hideForm] = useState(false); //bool
-    
     const styleButton = {
         color:"#242426"
     };
-
-    const [todos, setTodos] = useState([]);
 
     const [cards, setCards] = useState([
         {
@@ -40,20 +43,19 @@ export default function FormCard(){
     
     const getListUI = async () => {
         const response = await getList();
-        //console.log(response.data);
-        setTodos(response.data);
+        dispatch(setCardsConsume(response.data));
+        //setTodos(response.data);
     };
 
     useEffect(() => {
         getListUI();
     }, []);
-    
 
     return (
         <div>
             <p style={styles}>Mi día</p>
             <Cards cards={cards} setCards={setCards} />
-            <CardsConsume cards={todos} setCards={setTodos} />
+            <CardsConsume cards={cardsConsume} setCards={setCardsConsume} />
 
             <div className="center">
                 <IconButton onClick={() => hideForm(!showForm)}  aria-label="addcircleicon">

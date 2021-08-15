@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import 'date-fns';
-import CustomizedInputBase from './TextField';
+import AddCardBar from './AddCardBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -60,7 +60,7 @@ export default function FormCreate({cards, setCards}) {
     return (
         <div>
             <form onSubmit={(ev) => addCard(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
-                <CustomizedInputBase card={card} setCard={setCard} />
+                <AddCardBar card={card} setCard={setCard} />
             </form>
         </div>
     )
