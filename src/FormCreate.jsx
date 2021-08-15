@@ -3,13 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import CustomizedInputBase from './TextField';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,15 +20,14 @@ const useStyles = makeStyles((theme) => ({
         margin: "10px",
         background: '#C70039',
         color: '#CCD1D1'
+    },
+    iconButton: {
+        padding: 10
     }
 }));
 
 export default function FormCreate({cards, setCards}) {
     const classes = useStyles();
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2021-08-11T11:00:00'));
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
 
     const initialCard = {
         id:'', 
@@ -69,15 +62,18 @@ export default function FormCreate({cards, setCards}) {
     return (
         <div>
             <form onSubmit={(ev) => addCard(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
+                <CustomizedInputBase/>
                 <TextField 
                     type="text" 
                     required
                     value={card.title}
                     onChange={(ev) => setCard({...card, title: ev.target.value})}       
                     fullWidth 
-                    style={{ margin: 8 }} 
+                    style={{ margin: 8, borderRadius: 4}} 
                     id="title" 
-                    label="Nombre" />
+                    label="Nombre" 
+                    variant="filled"
+                    color="secondary"/>
                 <TextField 
                     type="text" 
                     required
@@ -86,49 +82,41 @@ export default function FormCreate({cards, setCards}) {
                     fullWidth 
                     style={{ margin: 8 }} 
                     id="descripcion" 
-                    label="Descripción" />
-                <TextField 
-                    type="text" 
+                    label="Descripción" 
+                    variant="filled"
+                    color="secondary"/>
+                <TextField
+                    type="date"
+                    label="Fecha de vencimiento "
                     required
-                    value={card.fecha}
-                    onChange={(ev) => setCard({...card, fecha: ev.target.value})}  
+                    defaultValue="2021-08-13"
+                    onChange={(ev) => setCard({...card, fecha: ev.target.value})}
                     fullWidth 
                     style={{ margin: 8 }} 
-                    id="fecha" 
-                    label="Fecha" />
-                <TextField 
-                    type="text" 
+                    id="fecha"
+                    variant="filled"
+                    color="secondary"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    />
+                <TextField
+                    type="time"
+                    label="Avísame a las: "
                     required
-                    value={card.hora}
-                    onChange={(ev) => setCard({...card, hora: ev.target.value})}                   
+                    defaultValue="07:30"
+                    onChange={(ev) => setCard({...card, hora: ev.target.value})}    
                     style={{ margin: 8 }} 
                     id="hora" 
-                    label="Hora" />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justifyContent="space-around">
-                        <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Fecha de vencimiento"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                        />
-                        <KeyboardTimePicker
-                        margin="normal"
-                        id="time-picker"
-                        label="Avísame a las "
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change time',
-                        }}
-                        />
-                    </Grid>
-                </MuiPickersUtilsProvider>
+                    variant="filled"
+                    color="secondary"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    inputProps={{
+                        step: 300, // 5 min
+                    }}
+                />
                 <br/>
                 <div className="right">
                     <Button    type="submit" variant="outlined" style={{ margin: 15 }} color="secondary"> Agregar </Button>
