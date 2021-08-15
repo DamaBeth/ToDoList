@@ -56,7 +56,7 @@ export default function SimpleCard(props) {
                   {props.title}
               </Typography>
               <Typography color="textSecondary" className={classes.pos}>
-                Tareas {bull} {props.fecha} {bull} {props.hora}
+                {props.descripcion} {bull} {props.fecha} {bull} {props.hora}
               </Typography>
             </Grid>
           </Grid>

@@ -17,7 +17,7 @@ export default function CardsConsume({cards, setCards}) {
                             key={card.id}
                             id={card.id}
                             title={card.title}
-                            descripcion={" "}
+                            descripcion={"Tareas"}
                             fecha={"Hoy"}
                             hora={"9:00 pm"}
                             active={card.active}

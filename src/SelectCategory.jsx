@@ -29,13 +29,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SelectCategory() {
+export default function SelectCategory({card, setCard}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [age, setAge] = React.useState('');
+  const [category, setCategory] = React.useState(card.descripcion);
 
-  const handleChange = (event) => {
-    setAge(Number(event.target.value) || '');
+  const handleChange = (ev) => {
+    setCategory(ev.target.value || '');
+    setCard({...card, descripcion: ev.target.value});
   };
 
   const handleClickOpen = () => {
@@ -59,18 +60,18 @@ export default function SelectCategory() {
                 <InputLabel id="demo-dialog-select-label">Lista de categorías</InputLabel>
                 <Select
                     labelId="demo-dialog-select-label"
-                    id="demo-dialog-select"
-                    value={age}
+                    id="descripcion" 
+                    value={category}
                     onChange={handleChange}
                     input={<Input />}
                 >
                     <MenuItem value="">
                     <em>Mi día</em>
                     </MenuItem>
-                    <MenuItem value={10}>Clases</MenuItem>
-                    <MenuItem value={20}>Importante</MenuItem>
-                    <MenuItem value={30}>Planeado</MenuItem>
-                    <MenuItem value={40}>Tareas</MenuItem>
+                    <MenuItem value={"Clases"}>Clases</MenuItem>
+                    <MenuItem value={"Importante"}>Importante</MenuItem>
+                    <MenuItem value={"Planeado"}>Planeado</MenuItem>
+                    <MenuItem value={"Tareas"}>Tareas</MenuItem>
                 </Select>
                 </FormControl>
             </form>

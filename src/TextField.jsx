@@ -4,10 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import EventIcon from '@material-ui/icons/Event';
 import Grid from '@material-ui/core/Grid';
 import SelectCategory from './SelectCategory';
+import SelectDate from './SelectDate';
+import SelectTime from './SelectTime';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,15 +33,12 @@ const useStyles = makeStyles((theme) => ({
       background:'#242426',
       color:'#ADB5BD',
       height: 60,
+      borderRadius: 4
     }
 }));
 
-export default function CustomizedInputBase() {
+export default function CustomizedInputBase({card, setCard}) {
   const classes = useStyles();
-
-  const abrirCal = (ev) => {
-    ev.preventDefault();
-  };
 
     return (
         <div className={classes.root}>
@@ -57,24 +54,24 @@ export default function CustomizedInputBase() {
                             <Grid item xs>
                                 <InputBase
                                     fullWidth 
+                                    required
+                                    value={card.title}
+                                    id="title" 
                                     className={classes.input}
                                     placeholder="Agregar una tarea"
+                                    onChange={(ev) => setCard({...card, title: ev.target.value})}
                                 />
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <SelectCategory/>
+                        <SelectCategory card={card} setCard={setCard} />
                     </Grid>
                     <Grid item>
-                        <IconButton className={classes.image}>
-                            <EventIcon style={{ color: "#CCD1D1" }}/>
-                        </IconButton>
+                        <SelectDate card={card} setCard={setCard} />
                     </Grid>
                     <Grid item>
-                        <IconButton className={classes.image}>
-                            <AlarmIcon style={{ color: "#CCD1D1" }}/>
-                        </IconButton>
+                        <SelectTime card={card} setCard={setCard} />
                     </Grid>
                 </Grid>
             </Paper>
