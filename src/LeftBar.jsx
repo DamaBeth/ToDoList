@@ -12,16 +12,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import EventIcon from '@material-ui/icons/Event';
 import HomeIcon from '@material-ui/icons/Home';
 import ReorderIcon from '@material-ui/icons/Reorder';
 import FormCard from "./FormTodo";
+import AvatarName from "./Avatar";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const drawerWidth = 250;
+const drawerWidth = 315;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    marginTop: 65
+    marginTop: 0
   },
   drawerPaper: {
     width: drawerWidth,
@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: "#F07167",
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    marginTop: 50
   },
 }));
 
@@ -80,7 +81,8 @@ function LeftBar(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      <AvatarName />
+      
         <List>
             <ListItem button>
                 <ListItemIcon style={styleButton}>
@@ -107,7 +109,7 @@ function LeftBar(props) {
                 <ListItemText primary="Tareas" />
             </ListItem>
         </List>
-        <Divider />
+        <Divider style={{ background:'white' }} />
         <List>
           {['Clases'].map((text, index) => (
             <ListItem button key={text}>
@@ -137,9 +139,7 @@ function LeftBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            To do list
-          </Typography>
+         
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
