@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import SimpleCard from "./Card";
+import SimpleCardConsume from "./CardConsume";
 
 export default function CardsConsume({cards, setCards}) {
     const deleteCard = (id) => {
@@ -13,7 +13,7 @@ export default function CardsConsume({cards, setCards}) {
             <Grid item xs={6} sm={12}>
                 {cards.map(card => {
                     return (
-                        <SimpleCard 
+                        <SimpleCardConsume 
                             key={card.id}
                             id={card.id}
                             title={card.title}

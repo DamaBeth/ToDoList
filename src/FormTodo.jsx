@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { setCardsConsume } from "./redux/reducers/cardConsumeReducer";
 import { setCards } from "./redux/reducers/cardReducer";
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
 import CardsConsume from "./CardsConsume";
 import CardsComplete from "./CardsComplete";
@@ -14,10 +15,9 @@ export default function FormCard(){
     const cardsConsume = useSelector((state) => state.cardConsume);
     const cards = useSelector((state) => state.card);
     const dispatch = useDispatch();
-    const [showForm, hideForm] = useState(false); //bool
-    const styleButton = {
-        color:"#242426"
-    };
+    const [showDayCards, hideDayCards] = useState(true);
+    const [showCompleteCards, hideCompleteCards] = useState(true);
+    const styleButton = { color:"#242426" };
     const styles = {
         margin: "10px", 
         left: 0, 
@@ -38,23 +38,50 @@ export default function FormCard(){
 
     return (
         <div>
-            <p style={styles}>Mi día</p>
-            <Cards cards={cards} setCards={setCards} />
-            <CardsConsume cards={cardsConsume} setCards={setCardsConsume} />
-            <p style={styles}>Completado</p>
-            <CardsComplete />
-
-            <div className="center">
-                <IconButton onClick={() => hideForm(!showForm)}  aria-label="addcircleicon">
-                    <AddCircleIcon style={styleButton} />
+            <div>
+                <p style={styles}>Mi día
+                <IconButton onClick={() => hideDayCards(!showDayCards)}  aria-label="addcircleicon">
+                    { showDayCards ? (
+                        <ExpandMoreIcon style={styleButton} />
+                    ) : (
+                        <ExpandLessIcon style={styleButton} />
+                    ) 
+                    }
                 </IconButton>
+                </p>
             </div>
-            
-            { showForm ? (
-                <FormCreate cards={cards} />
+
+            { showDayCards ? (
+                <div>
+                    <Cards cards={cards} setCards={setCards} />
+                    <CardsConsume cards={cardsConsume} setCards={setCardsConsume} />
+                </div>
             ) : (
-                console.log("Formulario oculto")) 
-            }
+                console.log("Tareas del día ocultas")
+            )}
+
+            <div>
+                <p style={styles}>Completado
+                    <IconButton onClick={() => hideCompleteCards(!showCompleteCards)}  aria-label="addcircleicon">
+                        { showCompleteCards ? (
+                            <ExpandMoreIcon style={styleButton} />
+                        ) : (
+                            <ExpandLessIcon style={styleButton} />
+                        ) 
+                        }
+                    </IconButton>
+                </p>
+            </div>
+
+            { showCompleteCards ? (
+                <div>
+                    <CardsComplete />
+                </div>
+            ) : (
+                console.log("Tareas completadas ocultas")
+            )}
+
+            <FormCreate cards={cards} />
         </div> 
     );
 }

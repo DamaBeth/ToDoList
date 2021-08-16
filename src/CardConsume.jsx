@@ -6,9 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import DeleteIcon from '@material-ui/icons/Delete';
-import RightBar from "./RightBar";
 import { useDispatch } from 'react-redux';
-import { deleteCard } from './redux/reducers/cardReducer';
+import { deleteCardConsume } from './redux/reducers/cardConsumeReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SimpleCard(props) {
+export default function SimpleCardConsume(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const [valueEdit,setValueEdit] = useState(false);
   const dispatch = useDispatch();
 
-  const actionDeleteCard = () => {
-    dispatch(deleteCard( { id: props.id } ));
+  const actionDeleteCardConsume = () => {
+    dispatch(deleteCardConsume( { id: props.id } ));
   }
 
   return (
@@ -67,22 +66,12 @@ export default function SimpleCard(props) {
           </Grid>
         </Grid>
         <Grid item>
-          <ButtonBase className={classes.image} onClick={actionDeleteCard} >
+          <ButtonBase className={classes.image} onClick={actionDeleteCardConsume} >
             <DeleteIcon style={{ color: "#CCD1D1" }}/>
           </ButtonBase>
         </Grid>
       </Grid>
       </Paper>
-      
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
-        {valueEdit ? (
-          <RightBar valueEdit={valueEdit}/>
-        ) : (
-          console.log("Fuera de edición")
-        ) }
-        </Grid>
-      </Grid>
     </div>
   );
 }
