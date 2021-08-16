@@ -22,7 +22,6 @@ export default function FormCard(props){
     const dispatch = useDispatch();
     const [showDayCards, hideDayCards] = useState(true);
     const [showCompleteCards, hideCompleteCards] = useState(true);
-    const [showItemsSelect, hideItemsSelect] = useState(true);
     const styleButton = { color:"#242426" };
     const styles = {
         margin: "10px", 
