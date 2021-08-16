@@ -10,7 +10,7 @@ export default function CardsComplete() {
     const cardsConsumeCompleted = useSelector((state) => state.cardConsume.filter((cardConsume)=> cardConsume.active === true));
 
     return (
-        <div>
+        <div style={{marginBottom:"10px" }} >
             <Cards cards={cardsCompleted} setCards={setCards} />
             <CardsConsume cards={cardsConsumeCompleted} setCards={setCardsConsume} />
         </div>

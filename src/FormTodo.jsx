@@ -11,12 +11,18 @@ import getList from "./Provider";
 import CardsConsume from "./CardsConsume";
 import Cards from "./Cards";
 
-export default function FormCard(){
+export default function FormCard(props){
+    console.log("Tareas: " + props.itemSelect );
     const cardsConsume = useSelector((state) => state.cardConsume.filter((cardConsume)=> cardConsume.active === false));
     const cards = useSelector( (state) => state.card.filter((card)=> card.active === false) );
+    
+    const cardsConsumeItem = useSelector((state) => state.cardConsume.filter((cardConsume)=> cardConsume.descripcion === props.itemSelect));
+    const cardsItem = useSelector( (state) => state.card.filter((card)=> card.descripcion === props.itemSelect) );
+    
     const dispatch = useDispatch();
     const [showDayCards, hideDayCards] = useState(true);
     const [showCompleteCards, hideCompleteCards] = useState(true);
+    const [showItemsSelect, hideItemsSelect] = useState(true);
     const styleButton = { color:"#242426" };
     const styles = {
         margin: "10px", 
@@ -80,7 +86,13 @@ export default function FormCard(){
             ) : (
                 console.log("Tareas completadas ocultas")
             )}
-
+            {props.itemActive ? (
+                <div>
+                    <p style={styles}>{props.itemSelect}</p>
+                    <Cards cards={cardsItem} setCards={setCards} />
+                    <CardsConsume cards={cardsConsumeItem} setCards={setCardsConsume} />
+                </div>
+                ) : (console.log("El filtro está desactivado"))}
             <FormCreate cards={cards} />
         </div> 
     );

@@ -78,6 +78,16 @@ function LeftBar(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const [openImportant, closeImportant] = useState(false);
+  const [openPlan, closePlan] = useState(false);
+  const [openClass, closeClass] = useState(false);
+  const [openTask, closeTask] = useState(false);
+
+  const showImportant = () => { closeImportant(!openImportant); }
+  const showPlan = () => { closePlan(!openPlan); }
+  const showClass = () => { closeClass(!openClass); }
+  const showTask = () => { closeTask(!openTask); }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -90,19 +100,19 @@ function LeftBar(props) {
                 </ListItemIcon>
                 <ListItemText primary="Mi día" />
             </ListItem>
-            <ListItem button >
+            <ListItem button onClick={showImportant}>
                 <ListItemIcon style={styleButton}>
                     <StarBorderIcon />
                 </ListItemIcon>
                 <ListItemText primary="Importante" />
             </ListItem>
-            <ListItem button >
+            <ListItem button onClick={showPlan}>
                 <ListItemIcon style={styleButton}>
                     <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Planeado" />
             </ListItem>
-            <ListItem button >
+            <ListItem button onClick={showTask}>
                 <ListItemIcon style={styleButton}>
                     <HomeIcon />
                 </ListItemIcon>
@@ -111,7 +121,7 @@ function LeftBar(props) {
         </List>
         <Divider style={{ background:'white' }} />
         <List>
-            <ListItem button >
+            <ListItem button onClick={showClass}>
                 <ListItemIcon style={styleButton}>
                   <ReorderIcon />
                 </ListItemIcon>
@@ -172,7 +182,42 @@ function LeftBar(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <FormCard />
+        {
+          openImportant || openPlan || openClass || openTask ? (
+            console.log("Usando filtro")
+          ) : (
+            <FormCard/>
+          )
+        }
+        
+        {
+          openImportant ? (
+            <FormCard itemSelect={"Importante"} itemActive={openImportant} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openPlan ? (
+            <FormCard itemSelect={"Planeado"} itemActive={openPlan} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openClass ? (
+            <FormCard itemSelect={"Clases"} itemActive={openClass} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openTask ? (
+            <FormCard itemSelect={"Tareas"} itemActive={openTask} />
+          ) : (
+            <div></div>
+          )
+        }
       </main>
     </div>
   );
