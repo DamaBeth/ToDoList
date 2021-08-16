@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import DeleteIcon from '@material-ui/icons/Delete';
-import RightBar from "./RightBar";
 import { useDispatch } from 'react-redux';
 import { deleteCard } from './redux/reducers/cardReducer';
 
@@ -73,16 +72,6 @@ export default function SimpleCard(props) {
         </Grid>
       </Grid>
       </Paper>
-      
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
-        {valueEdit ? (
-          <RightBar valueEdit={valueEdit}/>
-        ) : (
-          console.log("Fuera de edición")
-        ) }
-        </Grid>
-      </Grid>
     </div>
   );
 }

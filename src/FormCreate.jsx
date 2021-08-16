@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCards } from './redux/reducers/cardReducer';
+import { setCards } from './redux/reducers/cardReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import 'date-fns';
 import AddCardBar from './AddCardBar';
@@ -50,11 +50,13 @@ export default function FormCreate({ cards }) {
         }
 
         dispatch(
-            addCards([
+            setCards([
                 ...cards,
                 {
                     ...cardValue,
-                    id: cards.length > 0 ? Math.max(...cards.map(cardValue => cardValue.id)) + 1 : 1
+                    id: cards.length > 0 ? Math.max(...cards.map(cardValue => cardValue.id)) + 1 : 1,
+                    active:false,
+                    prioridad:"baja"
                 }
             ])
         );
@@ -64,7 +66,7 @@ export default function FormCreate({ cards }) {
 
     return (
         <div>
-            <form onSubmit={(ev) => addCardSubmit(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
+            <form onSubmit={addCardSubmit} className={classes.root} noValidate id="addNewCard" autoComplete="off">
                 <AddCardBar card={cardValue} setCard={setCardValue} />
             </form>
         </div>

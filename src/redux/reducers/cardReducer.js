@@ -6,18 +6,18 @@ export const cardReducer = createSlice({
         {
             id:1, 
             title:"Reunión con Full Stack",         
-            descripcion:'Reunión de repaso',    
+            descripcion:'Importante',    
             fecha: "Hoy",   
-            hora:"11:00 am",
+            hora:"11:00",
             active:false,
             prioridad:"alta"
         },
         {
             id:2, 
             title:"Clase de Dispositivos móviles",  
-            descripcion:'Clase virtual',        
+            descripcion:'Clases',        
             fecha: "Hoy",   
-            hora:"1:00 pm",
+            hora:"1:00",
             active:false,
             prioridad:"baja"
         }
