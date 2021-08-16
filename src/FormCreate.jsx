@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCards } from './redux/reducers/cardReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import 'date-fns';
 import AddCardBar from './AddCardBar';
@@ -24,9 +26,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function FormCreate({cards, setCards}) {
-    const classes = useStyles();
 
+export default function FormCreate({ cards }) {
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const [cardValue, setCardValue] = useState('');
     const initialCard = {
         id:'', 
         title:'', 
@@ -35,33 +39,34 @@ export default function FormCreate({cards, setCards}) {
         hora:'',
         active:false,
         prioridad:"baja"
-    }
+    };
 
-    const [card, setCard] = useState(initialCard);
-
-    const addCard = (ev) => {
+    const addCardSubmit = (ev) => {
         ev.preventDefault();
-        
-        if(card.title.trim() === "" || card.fecha.trim() === "") 
+
+        if(cardValue.title.trim() === "" || cardValue.fecha.trim() === "") 
         {
             return alert("Ingrese todos los datos para continuar")
         }
+
+        dispatch(
+            addCards([
+                ...cards,
+                {
+                    ...cardValue,
+                    id: cards.length > 0 ? Math.max(...cards.map(cardValue => cardValue.id)) + 1 : 1
+                }
+            ])
+        );
         
-        setCards([
-            ...cards,
-            {
-                ...card,
-                id: cards.length > 0 ? Math.max(...cards.map(card => card.id)) + 1 : 1
-            }
-        ])
-        setCard(initialCard);
+        setCardValue(initialCard);
     };
 
     return (
         <div>
-            <form onSubmit={(ev) => addCard(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
-                <AddCardBar card={card} setCard={setCard} />
+            <form onSubmit={(ev) => addCardSubmit(ev)} className={classes.root} noValidate id="addNewCard" autoComplete="off">
+                <AddCardBar card={cardValue} setCard={setCardValue} />
             </form>
         </div>
-    )
+    );
 }

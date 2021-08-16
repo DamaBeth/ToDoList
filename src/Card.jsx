@@ -9,6 +9,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 //import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import DeleteIcon from '@material-ui/icons/Delete';
 import RightBar from "./RightBar";
+import { useDispatch } from 'react-redux';
+import { deleteCard } from './redux/reducers/cardReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +41,11 @@ export default function SimpleCard(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const [valueEdit,setValueEdit] = useState(false);
+  const dispatch = useDispatch();
+
+  const actionDeleteCard = () => {
+    dispatch(deleteCard( { id: props.id } ));
+  }
 
   return (
     <div className={classes.root}>
@@ -46,7 +53,7 @@ export default function SimpleCard(props) {
         <Grid container>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <CheckBoxCircle />
+              <CheckBoxCircle id={props.id} active={props.active} />
             </ButtonBase>
           </Grid>
         <Grid item xs={12} sm container style={{ cursor: 'pointer' }} onClick={() => setValueEdit(!valueEdit)}>
@@ -62,7 +69,7 @@ export default function SimpleCard(props) {
           </Grid>
         </Grid>
         <Grid item>
-          <ButtonBase className={classes.image} onClick={() => props.deleteCard(props.id)}>
+          <ButtonBase className={classes.image} onClick={actionDeleteCard} >
             <DeleteIcon style={{ color: "#CCD1D1" }}/>
           </ButtonBase>
         </Grid>
