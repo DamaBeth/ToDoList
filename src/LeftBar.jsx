@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -72,7 +72,7 @@ function LeftBar(props) {
     };
   
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -90,19 +90,19 @@ function LeftBar(props) {
                 </ListItemIcon>
                 <ListItemText primary="Mi día" />
             </ListItem>
-            <ListItem button>
+            <ListItem button >
                 <ListItemIcon style={styleButton}>
                     <StarBorderIcon />
                 </ListItemIcon>
                 <ListItemText primary="Importante" />
             </ListItem>
-            <ListItem button>
+            <ListItem button >
                 <ListItemIcon style={styleButton}>
                     <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Planeado" />
             </ListItem>
-            <ListItem button>
+            <ListItem button >
                 <ListItemIcon style={styleButton}>
                     <HomeIcon />
                 </ListItemIcon>
@@ -111,14 +111,12 @@ function LeftBar(props) {
         </List>
         <Divider style={{ background:'white' }} />
         <List>
-          {['Clases'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon style={styleButton}>
-                  {index % 2 === 0 ? <ReorderIcon /> : <ReorderIcon />}
-                  </ListItemIcon>
-              <ListItemText primary={text} />
+            <ListItem button >
+                <ListItemIcon style={styleButton}>
+                  <ReorderIcon />
+                </ListItemIcon>
+                <ListItemText primary="Clases" />
             </ListItem>
-          ))}
         </List>
     </div>
   );

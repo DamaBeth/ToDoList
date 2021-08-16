@@ -5,15 +5,15 @@ import { setCards } from "./redux/reducers/cardReducer";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import IconButton from '@material-ui/core/IconButton';
-import CardsConsume from "./CardsConsume";
 import CardsComplete from "./CardsComplete";
 import FormCreate from "./FormCreate";
 import getList from "./Provider";
+import CardsConsume from "./CardsConsume";
 import Cards from "./Cards";
 
 export default function FormCard(){
-    const cardsConsume = useSelector((state) => state.cardConsume);
-    const cards = useSelector((state) => state.card);
+    const cardsConsume = useSelector((state) => state.cardConsume.filter((cardConsume)=> cardConsume.active === false));
+    const cards = useSelector( (state) => state.card.filter((card)=> card.active === false) );
     const dispatch = useDispatch();
     const [showDayCards, hideDayCards] = useState(true);
     const [showCompleteCards, hideCompleteCards] = useState(true);

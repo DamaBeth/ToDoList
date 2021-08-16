@@ -24,19 +24,6 @@ export const cardReducer = createSlice({
     ],
     reducers:{
         setCards: (state, { payload }) => payload,
-        addCards: (state, action) => {
-            const initialCard = {
-                key: action.payload.id, 
-                id: action.payload.id, 
-                title: action.payload.title, 
-                descripcion: action.payload.descripcion,
-                fecha: action.payload.fecha,
-                hora: action.payload.hora,
-                active:false,
-                prioridad:"baja"
-            };
-            state.push(initialCard);
-        },
         taskComplete: (state, action) => {
             const index = state.findIndex(
                 (card) => card.id === action.payload.id
@@ -50,6 +37,6 @@ export const cardReducer = createSlice({
 });
 
 //Escritura
-export const {setCards, addCards, taskComplete, deleteCard} = cardReducer.actions;
+export const {setCards, taskComplete, deleteCard} = cardReducer.actions;
 //Lectura
 export default cardReducer.reducer;
