@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import pokemonReducer from "./reducers/pokemonReducer";
+import cardConsumeReducer from "./reducers/cardConsumeReducer";
+import cardReducer from "./reducers/cardReducer";
 
 function initStore() {
   return configureStore({
     reducer: {
-      pokemon: pokemonReducer,
+      cardConsume: cardConsumeReducer,
+      card: cardReducer
     },
   });
 }

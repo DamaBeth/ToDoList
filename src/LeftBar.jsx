@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,16 +12,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import EventIcon from '@material-ui/icons/Event';
 import HomeIcon from '@material-ui/icons/Home';
 import ReorderIcon from '@material-ui/icons/Reorder';
 import FormCard from "./FormTodo";
+import AvatarName from "./Avatar";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const drawerWidth = 250;
+const drawerWidth = 315;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    marginTop: 65
+    marginTop: 0
   },
   drawerPaper: {
     width: drawerWidth,
@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: "#F07167",
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    marginTop: 50
   },
 }));
 
@@ -71,16 +72,27 @@ function LeftBar(props) {
     };
   
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const [openImportant, closeImportant] = useState(false);
+  const [openPlan, closePlan] = useState(false);
+  const [openClass, closeClass] = useState(false);
+  const [openTask, closeTask] = useState(false);
+
+  const showImportant = () => { closeImportant(!openImportant); }
+  const showPlan = () => { closePlan(!openPlan); }
+  const showClass = () => { closeClass(!openClass); }
+  const showTask = () => { closeTask(!openTask); }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      <AvatarName />
+      
         <List>
             <ListItem button>
                 <ListItemIcon style={styleButton}>
@@ -88,35 +100,33 @@ function LeftBar(props) {
                 </ListItemIcon>
                 <ListItemText primary="Mi día" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={showImportant}>
                 <ListItemIcon style={styleButton}>
                     <StarBorderIcon />
                 </ListItemIcon>
                 <ListItemText primary="Importante" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={showPlan}>
                 <ListItemIcon style={styleButton}>
                     <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Planeado" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={showTask}>
                 <ListItemIcon style={styleButton}>
                     <HomeIcon />
                 </ListItemIcon>
                 <ListItemText primary="Tareas" />
             </ListItem>
         </List>
-        <Divider />
+        <Divider style={{ background:'white' }} />
         <List>
-          {['Clases'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon style={styleButton}>
-                  {index % 2 === 0 ? <ReorderIcon /> : <ReorderIcon />}
-                  </ListItemIcon>
-              <ListItemText primary={text} />
+            <ListItem button onClick={showClass}>
+                <ListItemIcon style={styleButton}>
+                  <ReorderIcon />
+                </ListItemIcon>
+                <ListItemText primary="Clases" />
             </ListItem>
-          ))}
         </List>
     </div>
   );
@@ -137,9 +147,7 @@ function LeftBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            To do list
-          </Typography>
+         
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -174,7 +182,42 @@ function LeftBar(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <FormCard />
+        {
+          openImportant || openPlan || openClass || openTask ? (
+            console.log("Usando filtro")
+          ) : (
+            <FormCard/>
+          )
+        }
+        
+        {
+          openImportant ? (
+            <FormCard itemSelect={"Importante"} itemActive={openImportant} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openPlan ? (
+            <FormCard itemSelect={"Planeado"} itemActive={openPlan} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openClass ? (
+            <FormCard itemSelect={"Clases"} itemActive={openClass} />
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          openTask ? (
+            <FormCard itemSelect={"Tareas"} itemActive={openTask} />
+          ) : (
+            <div></div>
+          )
+        }
       </main>
     </div>
   );
